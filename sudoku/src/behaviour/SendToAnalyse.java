@@ -2,13 +2,10 @@ package behaviour;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import sudoku.Case;
 import sudoku.Group9Cases;
 import sudoku.Sudoku;
 
@@ -40,10 +37,7 @@ public class SendToAnalyse extends Behaviour {
 		if(message != null) {
 			
 			Group9Cases g = Group9Cases.fromJSON(message.getContent());
-			
 			sudoku.setFromGroup(index, g);
-			
-			sudoku.draw();
 			
 			over = true;
 		}

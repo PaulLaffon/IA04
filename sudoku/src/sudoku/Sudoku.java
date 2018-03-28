@@ -4,23 +4,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class Sudoku {
 	
 	private Case[][] grille;
-	
-	public Sudoku(Integer[][] init_grille) {
-		grille = new Case[9][9];
-		
-		for(int i = 0; i < 9; i++) {
-			for(int j = 0; j < 9; j++) {
-				grille[i][j] = new Case(init_grille[i][j]);
-			}
-		}
-	}
+	private BooleanProperty finished;
 	
 	public Sudoku(String filename) {
 		grille = new Case[9][9];
 		Scanner scanner = null;
+		
+		finished = new SimpleBooleanProperty(false);
 		
 		try {
 			scanner = new Scanner(new File(filename));
@@ -35,19 +31,21 @@ public class Sudoku {
 		}
 	}
 	
-	public boolean check() {
+	public BooleanProperty getFinishedProperty() { return finished; }
+	
+	public void checkFinished() {
 		for(int i = 0; i < 27; i++) {
 			if(!getGroup(i).check())
-				return false;
+				return;
 		}
-		return true;
+		
+		finished.setValue(true);
 	}
 	
 	public void draw() {
 		
 		System.out.println("");
-		System.out.println("");
-		
+
 		for(int i = 0; i < 9; i++) {
 			
 			System.out.println("");
@@ -66,7 +64,6 @@ public class Sudoku {
 			System.out.print(" |");
 		}
 		System.out.print("\n  -----------------");
-		System.out.println(check());
 	}
 	
 	public Group9Cases getGroup(int index) {
@@ -118,5 +115,7 @@ public class Sudoku {
 				}
 			}
 		}
+		
+		checkFinished();
 	}
 }

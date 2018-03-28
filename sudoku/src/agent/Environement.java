@@ -1,7 +1,11 @@
 package agent;
 
 import behaviour.ReceiveWorkingAgent;
+import behaviour.SendFinished;
 import jade.core.Agent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import sudoku.Constants;
 import sudoku.Sudoku;
 
 public class Environement extends Agent {
@@ -10,20 +14,17 @@ public class Environement extends Agent {
 	
 	@Override
 	protected void setup() {
-		/*sudoku = new Sudoku(new Integer[][]{
-			{5,0,0,0,0,4,0,0,8},
-			{0,1,0,9,0,7,0,0,0},
-			{0,9,2,8,5,0,7,0,6},
-			{7,0,0,3,0,1,0,0,4},
-			{0,0,0,0,0,0,0,0,0},
-			{6,0,0,2,0,8,0,0,1},
-			{1,0,8,0,3,2,4,9,0},
-			{0,0,0,1,0,6,0,5,0},
-			{3,0,0,7,0,0,0,0,2}
-		}); */ 
+		sudoku = new Sudoku(Constants.filename);
 		
-		sudoku = new Sudoku("src/grid/grille1.txt");
+		addBehaviour(new ReceiveWorkingAgent(sudoku));	
 		
-		addBehaviour(new ReceiveWorkingAgent(sudoku));		
+		sudoku.getFinishedProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				sudoku.draw();
+				addBehaviour(new SendFinished());
+			}
+		});
 	}
 }

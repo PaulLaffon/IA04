@@ -16,19 +16,12 @@ public class ReceiveAnalyse extends CyclicBehaviour {
 		ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
 		
 		if(message != null) {
-			
 			Group9Cases g  = Group9Cases.fromJSON(message.getContent());
 			
 			algo1(g);
-			
 			algo2(g);
-			//algo1(g);
-			
 			algo3(g);
-			//algo1(g);
-			
-			//algo4(g);
-			//algo1(g);
+			algo4(g);
 			
 			ACLMessage reply = message.createReply();
 			reply.setContent(g.toJSON());
@@ -86,7 +79,6 @@ public class ReceiveAnalyse extends CyclicBehaviour {
 					if(c.getPossibleValues().contains(i)) {
 						c.setValue(i);
 						c.getPossibleValues().clear();
-						//c.getPossibleValues().add(i);
 						break;
 					}
 				}

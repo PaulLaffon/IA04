@@ -3,6 +3,7 @@ package agent;
 import java.util.ArrayList;
 
 import behaviour.GoToWork;
+import behaviour.ParallelSimulation;
 import behaviour.ReceiveSubscrition;
 import jade.core.AID;
 import jade.core.Agent;
@@ -17,11 +18,9 @@ public class Simulation extends Agent {
 	
 	@Override
 	protected void setup() {
-		System.out.println(this.getArguments()[0]);
-		
 		analyseAgents = new ArrayList<AID>();
 		
 		addBehaviour(new ReceiveSubscrition(analyseAgents));
-		addBehaviour(new GoToWork(this, 1000, analyseAgents));
+		addBehaviour(new ParallelSimulation(this, analyseAgents));
 	}
 }

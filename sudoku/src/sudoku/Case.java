@@ -21,12 +21,12 @@ public class Case {
 	}
 	
 	public int getValue() {return value;}
-	public void setValue(Integer _value) { 
-		value = _value;
-	}
+	public void setValue(Integer _value) { value = _value; }
+	
 	public ArrayList<Integer> getPossibleValues() { return possibleValues; }
 	
 	public void merge(Case c) {
+		
 		if(this.value != 0)
 			return;
 		
@@ -39,7 +39,5 @@ public class Case {
 		possibleValues = newList;
 
 		this.value = c.getValue();
-	}
-
-	
+	}	
 }
