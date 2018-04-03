@@ -25,6 +25,7 @@ public class SendToAnalyse extends Behaviour {
 		String id = UUID.randomUUID().toString();
 		template = MessageTemplate.MatchConversationId(id);
 		message.setConversationId(id);
+		message.setPerformative(ACLMessage.REQUEST);
 		
 		message.setContent(sudoku.getGroup(index).toJSON());
 

@@ -16,7 +16,7 @@ public class ReceiveWorkingAgent extends CyclicBehaviour {
 	
 	@Override
 	public void action() {
-		ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
+		ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE));
 		
 		if(message != null) {
 			myAgent.addBehaviour(new SendToAnalyse(myAgent, message.createReply(), sudoku, compteur));
