@@ -63,7 +63,7 @@ public class Sudoku {
 			}
 			System.out.print(" |");
 		}
-		System.out.print("\n  -----------------");
+		System.out.println("\n  -----------------");
 	}
 	
 	public Group9Cases getGroup(int index) {

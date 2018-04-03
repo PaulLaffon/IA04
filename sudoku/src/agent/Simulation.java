@@ -2,15 +2,12 @@ package agent;
 
 import java.util.ArrayList;
 
-import behaviour.GoToWork;
 import behaviour.ParallelSimulation;
-import behaviour.ReceiveSubscrition;
+import behaviour.ReceiveSubscription;
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.TickerBehaviour;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
+import jade.core.behaviours.SequentialBehaviour;
+import sudoku.Constants;
 
 public class Simulation extends Agent {
 	
@@ -20,7 +17,10 @@ public class Simulation extends Agent {
 	protected void setup() {
 		analyseAgents = new ArrayList<AID>();
 		
-		addBehaviour(new ReceiveSubscrition(analyseAgents));
-		addBehaviour(new ParallelSimulation(this, analyseAgents));
+		SequentialBehaviour sequBehaviour = new SequentialBehaviour();
+		sequBehaviour.addSubBehaviour(new ReceiveSubscription(analyseAgents, Constants.subscriptionTimeout));
+		sequBehaviour.addSubBehaviour(new ParallelSimulation(this, analyseAgents));
+
+		addBehaviour(sequBehaviour);
 	}
 }

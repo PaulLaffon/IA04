@@ -10,9 +10,7 @@ import sudoku.Constants;
 public class ParallelSimulation extends ParallelBehaviour {
 	
 	public ParallelSimulation(Agent a, ArrayList<AID> agents) {
-		
 		super(a, ParallelBehaviour.WHEN_ANY);
-		
 		addSubBehaviour(new ReceiveFinished());
 		addSubBehaviour(new GoToWork(a, Constants.tickerTime, agents));
 	}

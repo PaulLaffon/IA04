@@ -13,6 +13,7 @@ public class ReceiveFinished extends Behaviour {
 		ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.INFORM));
 		
 		if(message != null) {
+			System.out.println("Solution found !");
 			over = true;
 		}
 		else {

@@ -18,6 +18,7 @@ public class GoToWork extends TickerBehaviour{
 
 	@Override
 	protected void onTick() {
+		System.out.println(analyseAgents.size() + " agents go to work !");
 		for(int i = 0; i < analyseAgents.size(); i++) {
 			ACLMessage message = new ACLMessage(ACLMessage.REQUEST);
 			message.addReceiver(new AID("Environement", AID.ISLOCALNAME));
