@@ -1,5 +1,0 @@
-main=false
-gui=false
-container-name = secondary_container
-host=localhost
-#port=1500
