@@ -1,0 +1,5 @@
+main=false
+gui=false
+container-name = analyse_container
+host=localhost
+#port=1500
